@@ -26,42 +26,41 @@ struct Person {
     }
 };
 
-Person* createPerson(const string& name, int count)
+Person* AddSum(const string& name, int count)
 {
     Person* p = new Person(name, count);
 
     int i;
+    int* tmp = new int[count];
 
     //If there are only a few scores, just do a quick check
     if (count < 3) {
-        int* tmp = new int[count];
-        double sum = 0.0;
+        int sum = 0;
 
-        for (i = 0; i < count; i++) {
-            tmp[i] = p->scores[i];
-            sum = sum + tmp[i];
+        for (i = count; i > 0; i--) {
+            sum = sum + i;
         }
 
-        double avg = sum / count;
-        cout << "Quick average for " << name << ": " << avg << endl;
+        cout << "Quick sum for " << name << ": " << sum << endl;
         return p;
     }
 
     //Normal case for larger inputs
-    double sum = 0.0;
-    for (i = 0; i < count; i++) {
-        sum = sum + p->scores[i];
+    int sum = 0;
+    for (i = count; i > 0; i--) {
+        tmp[i - 1] = i;
+        sum = sum + i;
     }
 
-    double avg = sum / count;
-    cout << "Average for " << name << ": " << avg << endl;
-
+    cout << "Sum for " << name << ": " << sum << endl;
+    delete[] tmp;
     return p;
 }
+
 int main() 
 {
-    Person* a = createPerson("Alice", 2);
-    Person* b = createPerson("Bob", 5);
+    Person* a = AddSum("Alice", 2);
+    Person* b = AddSum("Bob", 5);
 
     cout << "Person A: " << a->name << ", score0 = " << a->scores[0] << endl;
     cout << "Person B: " << b->name << ", score0 = " << b->scores[0] << endl;

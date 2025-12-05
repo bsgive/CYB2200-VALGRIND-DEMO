@@ -1,0 +1,11 @@
+//easy solution
+    delete x;
+    delete[] arr;
+    delete[] tmp;
+//Medium Solution
+    for (int i = 0; i < data.size(); i++) 
+    {
+    delete data[i];
+    }
+//Hard Solution
+    delete[] tmp;

@@ -2,7 +2,6 @@
 using namespace std;
 int main() 
 {
-
     int* x = new int(10);         
     int* arr = new int[50];       
 
@@ -11,6 +10,5 @@ int main()
     cout << "First element of arr: " << arr[0] << "\n";
 
     cout << "Program finished.\n";
-    
     return 0;
 }
