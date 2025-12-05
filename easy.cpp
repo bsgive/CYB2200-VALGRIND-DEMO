@@ -12,8 +12,5 @@ int main()
 
     cout << "Program finished.\n";
     
-    delete x;
-    delete[] arr;
-    
     return 0;
 }
