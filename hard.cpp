@@ -1,4 +1,3 @@
-// leak3_subtle.cpp
 #include <iostream>
 #include <string>
 
@@ -10,40 +9,55 @@ struct Person {
     int* scores;
     int count;
 
-    Person(const string& n, int c) {
+    Person(const string& n, int c)
+    {
         name = n;
         count = c;
         scores = new int[count];
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) 
+        {
             scores[i] = i * 5;
         }
     }
-
-    Person() 
+    ~Person()
     {
         delete[] scores;
     }
 };
 
-Person* createPerson(const string& name, int count) 
+Person* createPerson(const string& name, int count)
 {
     Person* p = new Person(name, count);
 
-    if (count < 3) {
-        int* tmp = new int[10];
-        tmp[0] = 42;
+    int i;
 
-        if (tmp[0] > 0) {
-            return p;
+    //If there are only a few scores, just do a quick check
+    if (count < 3) {
+        int* tmp = new int[count];
+        double sum = 0.0;
+
+        for (i = 0; i < count; i++) {
+            tmp[i] = p->scores[i];
+            sum = sum + tmp[i];
         }
 
-        delete[] tmp;
+        double avg = sum / count;
+        cout << "Quick average for " << name << ": " << avg << endl;
+        return p;
     }
+
+    //Normal case for larger inputs
+    double sum = 0.0;
+    for (i = 0; i < count; i++) {
+        sum = sum + p->scores[i];
+    }
+
+    double avg = sum / count;
+    cout << "Average for " << name << ": " << avg << endl;
 
     return p;
 }
-
 int main() 
 {
     Person* a = createPerson("Alice", 2);

@@ -1,4 +1,3 @@
-// leak2.cpp
 #include <iostream>
 #include <vector>
 
@@ -8,9 +7,9 @@ void fill(vector<int*>& v, int n)
 {
     for (int i = 0; i < n; i++) 
     {
-        // Allocate memory dynamically
+        //Allocate memory dynamically
         int* value = new int(i * 10);
-        // Store pointer in vector
+        //Store pointer in vector
         v.push_back(value);
     }
 }
